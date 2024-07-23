@@ -1,0 +1,40 @@
+version: "3.2"
+
+services:
+  cms:
+    image: cms-service:0.1.0 
+    ports:
+      - 9080:9090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/ballerina/requests.json:rw
+
+  workflow-engine:
+    image: workflow-engine
+    ports:
+      - 8070:8090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/app/requests.json:rw
+
+  api-manager:
+    image: wso2/wso2am:4.0.0
+    ports:
+      - 9443:9443
+      - 8243:8243
+      - 8280:8280 
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9443"]
+      interval: 10s
+      retries: 20
+
+  creditcard-status:
+    image: banking/status:1.0.0  
+    ports:
+      - 8240:8290
+      - 8250:8253
+      - 9161:9164
+    environment:
+      - MI_HOST=creditcard-status
+      - MI_PORT=8290
+    depends_on:
+      api-manager:
+        condition: service_healthy

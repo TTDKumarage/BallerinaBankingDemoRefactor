@@ -1,0 +1,23 @@
+'CREATE TABLE `application_requests` (
+  `application_id` int NOT NULL,
+  `card_type` varchar(30) DEFAULT NULL,
+  `requested_credit_limit` int DEFAULT NULL,
+  `request_type` varchar(20) DEFAULT NULL,
+  `customer_id` varchar(20) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `credit_limit` int DEFAULT NULL,
+  `annual_income` int DEFAULT NULL,
+  `employment_status` varchar(20) DEFAULT NULL,
+  `co_customer_id` varchar(20) DEFAULT NULL,
+  `co_name` varchar(50) DEFAULT NULL,
+  `co_email` varchar(50) DEFAULT NULL,
+  `co_phone` varchar(20) DEFAULT NULL,
+  `co_address` varchar(100) DEFAULT NULL,
+  `co_annual_income` int DEFAULT NULL,
+  `co_employment_status` varchar(20) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`application_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'

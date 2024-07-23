@@ -1,0 +1,17 @@
+version: "3.2"
+
+services:
+  cms:
+    image: cms-service:0.1.0 
+    ports:
+      - 9080:9090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/ballerina/requests.json:rw
+
+  workflow-engine:
+    image: workflow-engine
+    ports:
+      - 8070:8090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/app/requests.json:rw
+

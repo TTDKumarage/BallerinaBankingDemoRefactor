@@ -1,0 +1,53 @@
+version: "3.2"
+
+services:
+  cms:
+    image: cms-service:0.1.0 
+    ports:
+      - 9090:9090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/ballerina/requests.json:rw
+
+  core-bank:
+    image: core-bank:0.1.0
+    ports:
+      - 9095:9095
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  cib:
+    image: cib-service:0.1.0
+    ports:
+      - 9091:9091
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  bre:
+    image: business-rules-engine:0.1.0
+    ports:
+      - 9094:9094
+
+  api-manager:
+    image: wso2/wso2am:4.0.0
+    ports:
+      - 9443:9443
+      - 8243:8243
+      - 8280:8280 
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9443"]
+      interval: 10s
+      retries: 20
+
+  creditcard-request:
+    image: banking/request:1.0.0  
+    ports:
+      - 8260:8290
+      - 8253:8253
+      - 9164:9164
+    environment:
+      - MI_HOST=creditcard-request
+      - MI_PORT=8290
+    depends_on:
+      api-manager:
+        condition: service_healthy
+

@@ -1,0 +1,39 @@
+version: "3.2"
+
+services:
+  core-bank:
+    image: core-bank:0.1.0
+    ports:
+      - 9095:9095
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  frm:
+    image: frm-service:0.1.0
+    ports:
+      - 9096:9096
+
+  api-manager:
+    image: wso2/wso2am:4.0.0
+    ports:
+      - 9443:9443
+      - 8243:8243
+      - 8280:8280 
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9443"]
+      interval: 10s
+      retries: 20
+
+  creditcard-payment:
+    image: banking/payment:1.0.0 
+    ports:
+      - 8270:8290
+      - 8252:8253
+      - 9163:9164
+    environment:
+      - MI_HOST=creditcard-payment
+      - MI_PORT=8290
+    depends_on:
+      api-manager:
+        condition: service_healthy
+

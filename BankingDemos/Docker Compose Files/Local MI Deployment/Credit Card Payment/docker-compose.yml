@@ -1,0 +1,15 @@
+version: "3.2"
+
+services:
+  core-bank:
+    image: core-bank:0.1.0
+    ports:
+      - 9095:9095
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  frm:
+    image: frm-service:0.1.0
+    ports:
+      - 9096:9096
+

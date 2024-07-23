@@ -1,0 +1,5 @@
+DB_HOST = "testdb.dulsarakumarage.com"
+DB_USER = "testuser"
+DB_PASSWORD = "TestUser@123"
+DB_NAME = "creditcard_db"
+DB_PORT = 3306

@@ -1,0 +1,30 @@
+version: "3.2"
+
+services:
+  cms:
+    image: cms-service:0.1.0 
+    ports:
+      - 9090:9090
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/ballerina/requests.json:rw
+
+  core-bank:
+    image: core-bank:0.1.0
+    ports:
+      - 9095:9095
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  cib:
+    image: cib-service:0.1.0
+    ports:
+      - 9091:9091
+    volumes:
+      - ../../../Backend  Services/CMS/requests.json:/home/CMS/requests.json:rw
+
+  bre:
+    image: business-rules-engine:0.1.0
+    ports:
+      - 9094:9094
+
+ 

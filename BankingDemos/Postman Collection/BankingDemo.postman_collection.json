@@ -1,0 +1,1008 @@
+{
+	"info": {
+		"_postman_id": "3a3480ee-07f2-41cb-9ecb-7b3752a58a52",
+		"name": "Banking Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29271827",
+		"_collection_link": "https://restless-capsule-431835.postman.co/workspace/Airways~1f9a2c4b-1917-4d1d-be1a-b059cca35954/collection/29271827-3a3480ee-07f2-41cb-9ecb-7b3752a58a52?action=share&source=collection_link&creator=29271827"
+	},
+	"item": [
+		{
+			"name": "CIB",
+			"item": [
+				{
+					"name": "Credit Score Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"applicant_name\": \"John Doe\",\r\n  \"date_of_birth\": \"1985-03-15\",\r\n  \"social_security_number\": \"123-45-6789\",\r\n  \"address\": \"123 Main Street, Cityville, USA\",\r\n  \"request_purpose\": \"Credit Card Application\",\r\n  \"reference_number\": \"69890\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/cib/creditscore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"cib",
+								"creditscore"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Core Bank",
+			"item": [
+				{
+					"name": "Get the user info on finding the user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/cbs/users/search?first_name=John&last_name=Doe&social_security_number=123-45-6789",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"cbs",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "John"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe"
+								},
+								{
+									"key": "social_security_number",
+									"value": "123-45-6789"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the credit rating",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9095/cbs/credit_rating?user_id=1234567890",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"cbs",
+								"credit_rating"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1234567890"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Authorization Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"merchant_id\": \"MERCHANT123\",\r\n  \"amount\": 100.00,\r\n  \"currency\": \"USD\",\r\n  \"card_number\": \"**** **** **** 3456\",\r\n  \"expiry_date\": \"12/24\",\r\n  \"cvv\": \"123\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9095/cbs/cc/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9095",
+							"path": [
+								"cbs",
+								"cc",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Business Rules Engine",
+			"item": [
+				{
+					"name": "Request to Validate Credit Limit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"1234567890\",\r\n  \"credit_score\": 720,\r\n  \"credit_rating\": \"Good\",\r\n  \"requested_credit_limit\": 12000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9094/bre/validate/credit_limit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9094",
+							"path": [
+								"bre",
+								"validate",
+								"credit_limit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CMS",
+			"item": [
+				{
+					"name": "Basic Credit Card Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": \"1234567890\",\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@email.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"address\": \"123 Main Street, Cityville, USA\",\r\n  \"credit_limit\": 5000,\r\n  \"annual_income\": 60000,\r\n  \"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/cms/creditcardrequest_application",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"creditcardrequest_application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request payload with Co-Applicant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"primary_applicant\": {\r\n    \"customer_id\": \"1234567890\",\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"johndoe@email.com\",\r\n    \"phone\": \"123-456-7890\",\r\n    \"address\": \"123 Main Street, Cityville, USA\",\r\n    \"credit_limit\": 5000,\r\n    \"annual_income\": 60000,\r\n    \"employment_status\": \"Employed\"\r\n  },\r\n  \"co_applicant\": {\r\n    \"customer_id\": \"9876543210\",\r\n    \"name\": \"Jane Smith\",\r\n    \"email\": \"janesmith@email.com\",\r\n    \"phone\": \"987-654-3210\",\r\n    \"address\": \"456 Elm Street, Townsville, USA\",\r\n    \"annual_income\": 55000,\r\n    \"employment_status\": \"Employed\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/cms/creditcardrequest_application",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"creditcardrequest_application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request payload with Specific Card Type",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": \"1234567890\",\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@email.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"address\": \"123 Main Street, Cityville, USA\",\r\n  \"credit_limit\": 10000,\r\n  \"annual_income\": 80000,\r\n  \"employment_status\": \"Employed\",\r\n  \"card_type\": \"Platinum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/cms/creditcardrequest_application",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"creditcardrequest_application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request payload with Requested Credit Limit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": \"1234567890\",\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@email.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"address\": \"123 Main Street, Cityville, USA\",\r\n  \"requested_credit_limit\": 7500,\r\n  \"annual_income\": 70000,\r\n  \"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/cms/creditcardrequest_application",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"creditcardrequest_application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request Check Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/cms/creditcardrequest_application/710622",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"creditcardrequest_application",
+								"710622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request Status Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"application_id\": \"317070\",\r\n  \"status\": \"approved\",\r\n  \"message\": \"Credit card request (Application ID: 986748) is approved.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/cms/updateStatus/317070",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"cms",
+								"updateStatus",
+								"317070"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FRM",
+			"item": [
+				{
+					"name": "Fraud Analysis",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"merchant_id\": \"MERCHANT123\",\r\n  \"amount\": 100.00,\r\n  \"currency\": \"USD\",\r\n  \"card_number\": \"1234-5678-9012-3456\",\r\n  \"expiry_date\": \"12/24\",\r\n  \"cvv\": \"123\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9096/frm/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9096",
+							"path": [
+								"frm",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Request And Approval (Version 1) - Docker",
+			"item": [
+				{
+					"name": "Credit Card Request Approval (Approved)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<div style=\"text-align:center;\">\r",
+									"    <h2>Credit Card Request</h2>\r",
+									"    <table style=\"margin:auto;\">\r",
+									"        <tr>\r",
+									"            <td>User ID:</td>\r",
+									"            <td>{{response.user_id}}</td>\r",
+									"        </tr>\r",
+									"        <tr>\r",
+									"            <td>Credit Score:</td>\r",
+									"            <td>{{response.credit_score}}</td>\r",
+									"        </tr>\r",
+									"        <tr>\r",
+									"            <td>Credit Rating:</td>\r",
+									"            <td>{{response.credit_rating}}</td>\r",
+									"        </tr>\r",
+									"        <tr>\r",
+									"            <td>Requested Credit Limit:</td>\r",
+									"            <td>{{response.requested_credit_limit}}</td>\r",
+									"        </tr>\r",
+									"        <tr>\r",
+									"            <td>Approved Credit Limit:</td>\r",
+									"            <td>{{response.approved_credit_limit}}</td>\r",
+									"        </tr>\r",
+									"        <tr>\r",
+									"            <td>Message:</td>\r",
+									"            <td>{{response.message}}</td>\r",
+									"        </tr>\r",
+									"    </table>\r",
+									"</div>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return { response: pm.response.json() };\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Doe\",\r\n\"email\": \"johndoe@email.com\",\r\n\"social_security_number\":\"123-45-6789\",\r\n\"phone\": \"123-456-7890\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 50000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8260/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8260",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request Approval (Rejected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"johnsmith@email.com\",\r\n\"social_security_number\":\"123-45-6788\",\r\n\"phone\": \"123-456-7891\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8260/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8260",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Mark\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"marksmith@email.com\",\r\n\"social_security_number\":\"123-45-6778\",\r\n\"phone\": \"123-456-7791\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"UnEmployed\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8260/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8260",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Payment - Docker",
+			"item": [
+				{
+					"name": "Credit Card Payment (Success)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3456\",\r\n    \"expirationDate\": \"12/24\",\r\n    \"cvv\": \"123\"\r\n  },\r\n  \"amount\": 100.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT123\",\r\n  \"merchant_name\": \"Example Store\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976514651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8270/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8270",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Payment (Failed)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3455\",\r\n    \"expirationDate\": \"12/23\",\r\n    \"cvv\": \"456\"\r\n  },\r\n  \"amount\": 90.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT789\",\r\n  \"merchant_name\": \"Example Store1\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976504651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8270/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8270",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Payment (Fraudery detected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3890\",\r\n    \"expirationDate\": \"12/23\",\r\n    \"cvv\": \"678\"\r\n  },\r\n  \"amount\": 150.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT678\",\r\n  \"merchant_name\": \"Example Store\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976514651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8270/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8270",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Payment - Local MI",
+			"item": [
+				{
+					"name": "Credit Card Payment (Success)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3456\",\r\n    \"expirationDate\": \"12/24\",\r\n    \"cvv\": \"123\"\r\n  },\r\n  \"amount\": 100.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT123\",\r\n  \"merchant_name\": \"Example Store\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976514651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Payment (Failed)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3455\",\r\n    \"expirationDate\": \"12/23\",\r\n    \"cvv\": \"456\"\r\n  },\r\n  \"amount\": 90.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT789\",\r\n  \"merchant_name\": \"Example Store1\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976504651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Payment (Fraudery detected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditCard\": {\r\n    \"number\": \"1234-5678-9012-3890\",\r\n    \"expirationDate\": \"12/23\",\r\n    \"cvv\": \"678\"\r\n  },\r\n  \"amount\": 150.00,\r\n  \"currency\": \"USD\",\r\n  \"merchant_id\": \"MERCHANT678\",\r\n  \"merchant_name\": \"Example Store\",\r\n  \"timestamp\": \"2023-11-10T12:30:00Z\",\r\n  \"order_reference\":\"123568976514651\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Request And Approval (Version 2) - Docker",
+			"item": [
+				{
+					"name": "Credit Card Request(Granted)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Doe\",\r\n\"email\": \"johndoe@email.com\",\r\n\"social_security_number\":\"123-45-6789\",\r\n\"phone\": \"123-456-7890\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 10000,\r\n\"annual_income\": 50000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8230/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8230",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request(Rejected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"johnsmith@email.com\",\r\n\"social_security_number\":\"123-45-6788\",\r\n\"phone\": \"123-456-7891\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8230/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8230",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Mark\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"marksmith@email.com\",\r\n\"social_security_number\":\"123-45-6778\",\r\n\"phone\": \"123-456-7791\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"UnEmployed\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8230/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8230",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Status Tracking - Docker",
+			"item": [
+				{
+					"name": "Track status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8240/creditcardrequest_application/status/988601",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8240",
+							"path": [
+								"creditcardrequest_application",
+								"status",
+								"988601"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Status Tracking - Local MI",
+			"item": [
+				{
+					"name": "Track status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8290/creditcardrequest_application/status/749687",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditcardrequest_application",
+								"status",
+								"749687"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Request And Approval (Version 1) - Local MI",
+			"item": [
+				{
+					"name": "Credit Card Request Approval (Approved)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Doe\",\r\n\"email\": \"johndoe@email.com\",\r\n\"social_security_number\":\"123-45-6789\",\r\n\"phone\": \"123-456-7890\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 10000,\r\n\"annual_income\": 50000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request Approval (Rejected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"johnsmith@email.com\",\r\n\"social_security_number\":\"123-45-6788\",\r\n\"phone\": \"123-456-7891\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"Employed\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8290/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Mark\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"marksmith@email.com\",\r\n\"social_security_number\":\"123-45-6778\",\r\n\"phone\": \"123-456-7791\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"UnEmployed\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8290/bank/creditCardRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"bank",
+								"creditCardRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Card Request And Approval (Version 2) - Local MI",
+			"item": [
+				{
+					"name": "Credit Card Request(Granted)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Doe\",\r\n\"email\": \"johndoe@email.com\",\r\n\"social_security_number\":\"123-45-6789\",\r\n\"phone\": \"123-456-7890\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 10000,\r\n\"annual_income\": 50000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Request(Rejected)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"John\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"johnsmith@email.com\",\r\n\"social_security_number\":\"123-45-6788\",\r\n\"phone\": \"123-456-7891\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"Employed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Mark\",\r\n\"last_name\": \"Smith\",\r\n\"email\": \"marksmith@email.com\",\r\n\"social_security_number\":\"123-45-6778\",\r\n\"phone\": \"123-456-7791\",\r\n\"address\": \"123 Main Street, Cityville, USA\",\r\n\"credit_limit\": 12000,\r\n\"annual_income\": 60000,\r\n\"employment_status\": \"UnEmployed\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8290/creditCard/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8290",
+							"path": [
+								"creditCard",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
